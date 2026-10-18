@@ -1,0 +1,44 @@
+{
+  "seed": 20261017,
+  "primary_metric": "validation_f1_macro",
+  "selection_rule": "Mayor F1 macro de validación; mejora mínima de 0.002 y test cerrado hasta congelar el checkpoint.",
+  "shared": {
+    "architecture": "EfficientNet-B0",
+    "input_size": [224, 224, 3],
+    "classes": ["Battery", "Cable", "Keyboard", "Laptop", "Mobile", "Mouse", "PCB"],
+    "optimizer": "AdamW",
+    "weight_decay": 0.0001,
+    "batch_size": 32,
+    "max_epochs": 6,
+    "patience": 2,
+    "min_delta": 0.002,
+    "loss": "weighted_cross_entropy"
+  },
+  "head_experiments": [
+    {
+      "id": "E01_lr1e-3_drop02",
+      "learning_rate": 0.001,
+      "dropout": 0.2,
+      "change": "Referencia"
+    },
+    {
+      "id": "E02_lr3e-4_drop02",
+      "learning_rate": 0.0003,
+      "dropout": 0.2,
+      "change": "Menor tasa de aprendizaje"
+    },
+    {
+      "id": "E03_lr1e-3_drop04",
+      "learning_rate": 0.001,
+      "dropout": 0.4,
+      "change": "Mayor dropout"
+    }
+  ],
+  "fine_tuning": {
+    "unfrozen_feature_blocks": [7, 8],
+    "feature_learning_rate": 0.00001,
+    "classifier_learning_rate": 0.00005,
+    "gradient_clip_norm": 1.0
+  }
+}
+

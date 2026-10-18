@@ -1,0 +1,13 @@
+{
+  "seed": 20261017,
+  "python": "3.10.18",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "torch": "2.6.0+cu126",
+  "torchvision": "0.21.0+cu126",
+  "scikit_learn": "1.7.2",
+  "train_manifest_sha256": "b0759318003bab059154a48de9e1bff47fbc02cb4e70e72b672f956bfa9309fa",
+  "validation_manifest_sha256": "bb17b6d7c7d398d02f847b2114d5d574e028dd8756a17a803d98604313ef7eed",
+  "test_manifest_sha256": "e63e149a2417fb4773121710248fef286f9ab908d7133b7ccfa8c7997d19a935",
+  "selected_checkpoint_sha256": "9d5361fed4282fdbe5744f3e559cea4ecb7a252598699978b5a596a53146b349",
+  "notebook_history_sha256": "8d01fb57847441eaf7b1d25d0c6229fe9906d0e7c063562ede81507a7c479014"
+}

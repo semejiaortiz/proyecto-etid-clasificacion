@@ -1,0 +1,124 @@
+{
+  "resultado": "EJECUTADO",
+  "semilla": 20261017,
+  "tamano_entrada": [
+    128,
+    128,
+    3
+  ],
+  "hog": {
+    "orientations": 9,
+    "pixels_per_cell": [
+      8,
+      8
+    ],
+    "cells_per_block": [
+      2,
+      2
+    ],
+    "block_norm": "L2-Hys",
+    "transform_sqrt": true,
+    "feature_vector": true,
+    "channel_axis": -1
+  },
+  "dimension_hog": 8100,
+  "C_evaluados": [
+    0.01,
+    0.1,
+    1.0
+  ],
+  "C_seleccionado": 0.01,
+  "criterio_seleccion": "mayor F1 macro en validation; empate a favor del C menor",
+  "conteos": {
+    "train": 4289,
+    "validation": 983,
+    "test": 995
+  },
+  "distribucion_train": {
+    "Battery": 1007,
+    "Cable": 127,
+    "Keyboard": 365,
+    "Laptop": 376,
+    "Mobile": 776,
+    "Mouse": 803,
+    "PCB": 835
+  },
+  "manifiestos_sha256": {
+    "train": "b0759318003bab059154a48de9e1bff47fbc02cb4e70e72b672f956bfa9309fa",
+    "validation": "bb17b6d7c7d398d02f847b2114d5d574e028dd8756a17a803d98604313ef7eed",
+    "test": "e63e149a2417fb4773121710248fef286f9ab908d7133b7ccfa8c7997d19a935"
+  },
+  "validacion": [
+    {
+      "C": 0.01,
+      "accuracy": 0.40793489318413023,
+      "balanced_accuracy": 0.3182138730033482,
+      "precision_macro": 0.2761202353161995,
+      "recall_macro": 0.3182138730033482,
+      "f1_macro": 0.27909865999378997,
+      "fit_seconds": 8.731296400073916,
+      "n_iter_max": 82
+    },
+    {
+      "C": 0.1,
+      "accuracy": 0.3947100712105799,
+      "balanced_accuracy": 0.31184967125194524,
+      "precision_macro": 0.26761850907921103,
+      "recall_macro": 0.31184967125194524,
+      "f1_macro": 0.2747146473061922,
+      "fit_seconds": 17.085434900131077,
+      "n_iter_max": 211
+    },
+    {
+      "C": 1.0,
+      "accuracy": 0.38453713123092575,
+      "balanced_accuracy": 0.3056060179024515,
+      "precision_macro": 0.26139450359275124,
+      "recall_macro": 0.3056060179024515,
+      "f1_macro": 0.2697889448123551,
+      "fit_seconds": 26.29137200023979,
+      "n_iter_max": 446
+    }
+  ],
+  "test": {
+    "accuracy": 0.33467336683417087,
+    "balanced_accuracy": 0.360118606084355,
+    "precision_macro": 0.33886756919807554,
+    "recall_macro": 0.360118606084355,
+    "f1_macro": 0.28488155119369585
+  },
+  "controles_test": {
+    "most_frequent": {
+      "accuracy": 0.24522613065326634,
+      "balanced_accuracy": 0.14285714285714285,
+      "precision_macro": 0.03503230437903805,
+      "recall_macro": 0.14285714285714285,
+      "f1_macro": 0.05626657442638072
+    },
+    "stratified": {
+      "accuracy": 0.1798994974874372,
+      "balanced_accuracy": 0.15023825587754777,
+      "precision_macro": 0.1471817173676944,
+      "recall_macro": 0.15023825587754777,
+      "f1_macro": 0.14311021647662522
+    }
+  },
+  "tiempos_segundos": {
+    "extraccion": {
+      "train": 206.71782359993085,
+      "validation": 33.04090079991147,
+      "test": 63.38701099995524
+    },
+    "seleccion_hiperparametro": 52.108351099770516,
+    "ajuste_final_y_prediccion": 12.292782200034708
+  },
+  "versiones": {
+    "python": "3.10.18",
+    "plataforma": "Windows-10-10.0.26200-SP0",
+    "numpy": "1.26.4",
+    "Pillow": "11.1.0",
+    "scikit_image": "0.25.2",
+    "scikit_learn": "1.7.2",
+    "joblib": "1.5.2"
+  }
+}

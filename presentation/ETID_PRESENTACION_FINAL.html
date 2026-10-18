@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ETID · Presentación final del proyecto integrador</title>
+  <style>
+    :root {
+      --navy: #0b2f5b;
+      --blue: #1766a6;
+      --cyan: #18a6b8;
+      --ink: #1e293b;
+      --muted: #64748b;
+      --paper: #f7f9fc;
+      --line: #d8e2ee;
+      --soft: #eaf2fa;
+      --green: #168465;
+      --amber: #d87a16;
+      --red: #bb3d4b;
+      --white: #ffffff;
+      --shadow: 0 22px 60px rgba(11, 47, 91, .13);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: #dfe7f1; color: var(--ink); }
+    body { font-family: "Segoe UI", Arial, sans-serif; overflow: hidden; }
+
+    .deck {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      place-items: center;
+    }
+
+    .slide {
+      display: none;
+      position: relative;
+      width: min(96vw, calc(96vh * 16 / 9));
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      padding: 4.9% 5.4% 4.1%;
+      isolation: isolate;
+    }
+
+    .slide.active { display: block; animation: enter .35s ease-out; }
+    @keyframes enter { from { opacity: 0; transform: translateY(8px) scale(.995); } }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(circle at 90% 10%, rgba(24,166,184,.10), transparent 22%),
+        linear-gradient(rgba(11,47,91,.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(11,47,91,.022) 1px, transparent 1px);
+      background-size: auto, 34px 34px, 34px 34px;
+    }
+
+    .kicker {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      margin-bottom: .65rem;
+      color: var(--blue);
+      font-size: clamp(.7rem, 1.1vw, 1rem);
+      font-weight: 750;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .kicker::before { content: ""; width: 2.4rem; height: 3px; background: var(--cyan); border-radius: 3px; }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { font-size: clamp(2.2rem, 4.4vw, 4.4rem); line-height: .99; letter-spacing: -.045em; color: var(--navy); }
+    h2 { margin-bottom: 1.5rem; font-size: clamp(1.7rem, 3vw, 3rem); line-height: 1.05; letter-spacing: -.035em; color: var(--navy); }
+    h3 { margin-bottom: .55rem; font-size: clamp(1rem, 1.5vw, 1.45rem); color: var(--navy); }
+    p { font-size: clamp(.82rem, 1.25vw, 1.2rem); line-height: 1.45; }
+    .lead { max-width: 50rem; color: #334155; font-size: clamp(1rem, 1.7vw, 1.55rem); line-height: 1.38; }
+    .muted { color: var(--muted); }
+    .accent { color: var(--blue); }
+    .green { color: var(--green); }
+    .amber { color: var(--amber); }
+    .red { color: var(--red); }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5%; align-items: stretch; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.7%; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.3%; }
+    .split-wide { display: grid; grid-template-columns: 1.08fr .92fr; gap: 3%; align-items: center; }
+
+    .card {
+      background: rgba(255,255,255,.90);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.1rem 1.2rem;
+      box-shadow: 0 9px 25px rgba(11,47,91,.06);
+    }
+    .card strong { color: var(--navy); }
+    .card.tint { background: var(--soft); border-color: #c7d9eb; }
+    .card.dark { background: var(--navy); color: white; border-color: var(--navy); }
+    .card.dark h3, .card.dark strong { color: white; }
+
+    .metric {
+      font-weight: 820;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -.045em;
+      color: var(--navy);
+      font-size: clamp(2.1rem, 4.1vw, 4rem);
+      line-height: 1;
+    }
+    .metric.small { font-size: clamp(1.5rem, 2.8vw, 2.75rem); }
+    .label { margin-top: .45rem; color: var(--muted); font-size: clamp(.68rem, 1vw, .95rem); line-height: 1.25; }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .35rem .68rem;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--blue);
+      font-weight: 700;
+      font-size: clamp(.62rem, .9vw, .85rem);
+    }
+    .pill.ok { background: #e4f4ef; color: var(--green); }
+    .pill.warn { background: #fff1dc; color: #9b570e; }
+
+    .big-question {
+      border-left: 6px solid var(--cyan);
+      padding: .2rem 0 .2rem 1.3rem;
+      font-size: clamp(1.15rem, 2vw, 1.9rem);
+      line-height: 1.34;
+      color: var(--navy);
+      font-weight: 680;
+    }
+
+    .scope-list { display: grid; gap: .65rem; margin-top: 1rem; }
+    .scope-row { display: grid; grid-template-columns: 1.8rem 1fr; gap: .65rem; align-items: start; font-size: clamp(.72rem, 1.08vw, 1rem); }
+    .scope-row .mark { width: 1.6rem; height: 1.6rem; display: grid; place-items: center; border-radius: 50%; font-weight: 850; }
+    .scope-row.yes .mark { color: var(--green); background: #e4f4ef; }
+    .scope-row.no .mark { color: var(--red); background: #fbe9ec; }
+
+    .flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: .65rem; margin-top: 1.4rem; }
+    .flow-node { padding: 1rem .75rem; text-align: center; border-radius: 15px; background: white; border: 1px solid var(--line); }
+    .flow-node strong { display: block; color: var(--navy); font-size: clamp(1.1rem, 1.8vw, 1.7rem); }
+    .flow-node span { color: var(--muted); font-size: clamp(.62rem, .85vw, .82rem); }
+    .arrow { color: var(--cyan); font-size: clamp(1.3rem, 2.2vw, 2.1rem); font-weight: 800; }
+
+    .lockline { display: flex; justify-content: center; gap: 1rem; margin-top: 1.1rem; flex-wrap: wrap; }
+
+    .model-box { min-height: 15rem; display: flex; flex-direction: column; justify-content: space-between; }
+    .model-icon { font-size: 2.4rem; margin-bottom: .4rem; }
+    .model-steps { display: grid; gap: .45rem; }
+    .model-steps div { border-left: 3px solid var(--cyan); padding-left: .65rem; font-size: clamp(.68rem, 1vw, .95rem); }
+
+    .experiment-row { display: grid; grid-template-columns: 4.2rem 1fr 5.2rem; gap: .8rem; align-items: center; margin: .65rem 0; }
+    .experiment-row strong { color: var(--navy); }
+    .bar { position: relative; height: .7rem; border-radius: 99px; background: #dce7f1; overflow: hidden; }
+    .bar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--blue), var(--cyan)); }
+    .experiment-row.selected { background: #e6f5f2; padding: .55rem .65rem; border-radius: 12px; }
+
+    .chart-img { width: 100%; max-height: 52vh; object-fit: contain; border-radius: 12px; background: white; border: 1px solid var(--line); }
+    .chart-img.tall { max-height: 56vh; }
+
+    .comparison { display: grid; grid-template-columns: 1fr .42fr 1fr; align-items: center; gap: 1.2rem; margin-top: .8rem; }
+    .score-box { padding: 1.2rem; border-radius: 18px; background: white; border: 1px solid var(--line); text-align: center; }
+    .score-box.winner { border: 2px solid var(--green); box-shadow: 0 15px 35px rgba(22,132,101,.12); }
+    .delta { text-align: center; }
+    .delta .metric { color: var(--green); }
+
+    .class-row { display: grid; grid-template-columns: 5.3rem 1fr 3rem; align-items: center; gap: .65rem; margin: .36rem 0; font-size: clamp(.65rem, .92vw, .88rem); }
+    .class-row .bar i { background: var(--blue); }
+    .class-row.low .bar i { background: var(--amber); }
+    .class-row strong { color: var(--navy); font-variant-numeric: tabular-nums; text-align: right; }
+
+    .tree { padding: .95rem 1.1rem; border-radius: 14px; background: #0d2847; color: #dbeafe; font-family: Consolas, monospace; font-size: clamp(.62rem, .9vw, .86rem); line-height: 1.55; }
+    .tree .folder { color: #69d2dc; }
+    .tree .file { color: #f8fafc; }
+
+    .risk-table { width: 100%; border-collapse: separate; border-spacing: 0 .48rem; font-size: clamp(.67rem, .95vw, .9rem); }
+    .risk-table td { background: white; padding: .65rem .75rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .risk-table td:first-child { width: 24%; border-left: 5px solid var(--amber); border-radius: 9px 0 0 9px; font-weight: 720; color: var(--navy); }
+    .risk-table td:last-child { border-right: 1px solid var(--line); border-radius: 0 9px 9px 0; }
+
+    .verdict {
+      padding: 1.1rem 1.25rem;
+      border-radius: 16px;
+      color: white;
+      background: linear-gradient(120deg, var(--navy), #174e82);
+      font-size: clamp(1rem, 1.65vw, 1.5rem);
+      line-height: 1.35;
+      font-weight: 650;
+    }
+
+    .step-list { counter-reset: steps; display: grid; gap: .65rem; }
+    .step { position: relative; padding-left: 2.65rem; min-height: 2rem; font-size: clamp(.72rem, 1.08vw, 1rem); }
+    .step::before { counter-increment: steps; content: counter(steps); position: absolute; left: 0; top: -.15rem; width: 1.9rem; height: 1.9rem; display: grid; place-items: center; border-radius: 50%; background: var(--cyan); color: white; font-weight: 800; }
+
+    .source { position: absolute; left: 5.4%; right: 5.4%; bottom: 1.6%; color: var(--muted); font-size: clamp(.5rem, .68vw, .65rem); line-height: 1.25; }
+    .slide-number { position: absolute; right: 2.6%; top: 2.2%; color: #789; font-size: clamp(.58rem, .8vw, .8rem); font-weight: 700; }
+    .brand { position: absolute; left: 2.8%; top: 2.2%; color: var(--navy); font-weight: 800; font-size: clamp(.58rem, .8vw, .8rem); letter-spacing: .08em; }
+
+    .cover { background: var(--navy); color: white; }
+    .cover::before { background: radial-gradient(circle at 80% 20%, rgba(24,166,184,.28), transparent 26%), linear-gradient(135deg, transparent 48%, rgba(255,255,255,.035) 48%); background-size: auto, 28px 28px; }
+    .cover h1 { max-width: 72%; color: white; }
+    .cover .kicker { color: #86e1e9; }
+    .cover .lead { max-width: 58%; color: #dbeafe; }
+    .cover .meta { position: absolute; left: 5.4%; bottom: 8%; color: #dbeafe; font-size: clamp(.72rem, 1.08vw, 1rem); line-height: 1.65; }
+    .cover .orb { position: absolute; right: 7%; top: 21%; width: 20%; aspect-ratio: 1; border: 2px solid rgba(134,225,233,.5); border-radius: 50%; display: grid; place-items: center; color: white; font-size: clamp(2.5rem, 6vw, 6rem); box-shadow: inset 0 0 0 1.5rem rgba(24,166,184,.08), inset 0 0 0 3rem rgba(24,166,184,.06); }
+    .cover .slide-number, .cover .brand { color: #b9d8f5; }
+
+    .controls { position: fixed; left: 50%; bottom: 1.2rem; transform: translateX(-50%); z-index: 20; display: flex; align-items: center; gap: .65rem; background: rgba(11,47,91,.9); color: white; padding: .45rem .7rem; border-radius: 999px; box-shadow: 0 7px 24px rgba(0,0,0,.18); backdrop-filter: blur(8px); }
+    .controls button { width: 2rem; height: 2rem; border: 0; border-radius: 50%; color: white; background: rgba(255,255,255,.14); cursor: pointer; font-size: 1rem; }
+    .controls button:hover { background: rgba(255,255,255,.26); }
+    .progress { width: min(28vw, 18rem); height: 5px; overflow: hidden; background: rgba(255,255,255,.2); border-radius: 99px; }
+    .progress i { display: block; height: 100%; background: #69d2dc; transition: width .25s; }
+    .counter { min-width: 3rem; text-align: center; font-size: .75rem; font-variant-numeric: tabular-nums; }
+
+    @media (max-aspect-ratio: 4/3) {
+      .slide { width: 98vw; }
+      .controls { bottom: .35rem; }
+    }
+
+    @media print {
+      @page { size: 13.333in 7.5in; margin: 0; }
+      html, body { background: white; overflow: visible; }
+      .deck { display: block; width: auto; height: auto; }
+      .slide, .slide.active { display: block !important; width: 13.333in; height: 7.5in; page-break-after: always; box-shadow: none; animation: none; }
+      .controls { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" aria-label="Presentación final ETID">
+
+    <section class="slide cover active" data-title="Portada">
+      <div class="brand">ETID · PROYECTO INTEGRADOR</div><div class="slide-number">01</div>
+      <div class="kicker">Técnicas Avanzadas de Modelado en IA</div>
+      <h1>Clasificar mejor no significa decidir solo</h1>
+      <p class="lead">EfficientNet-B0 frente a una línea base clásica para reconocer siete categorías de residuos electrónicos.</p>
+      <div class="orb" aria-hidden="true">♻</div>
+      <div class="meta">
+        <strong>Sebastian Mejia Ortiz · Laura Mariana Jimenez Mienez · Luis Gonzalo Duran</strong><br>
+        Docente: Oscar Alberto Rodriguez Melendez · Unidad 4 · 2026
+      </div>
+    </section>
+
+    <section class="slide" data-title="Problema y alcance">
+      <div class="brand">01 · EL PROBLEMA</div><div class="slide-number">02</div>
+      <div class="kicker">Una decisión inicial, no una decisión final</div>
+      <h2>¿Puede una imagen apoyar la clasificación inicial?</h2>
+      <div class="split-wide">
+        <div>
+          <div class="big-question">¿EfficientNet-B0 mejora el F1 macro de HOG + LinearSVC cuando ambos modelos enfrentan procedencias independientes?</div>
+          <p class="lead" style="margin-top:1.2rem">El usuario previsto es el personal de recepción o inventario que necesita una <strong>sugerencia de categoría</strong>, siempre bajo supervisión.</p>
+        </div>
+        <div class="card">
+          <h3>Alcance que sí asumimos</h3>
+          <div class="scope-list">
+            <div class="scope-row yes"><span class="mark">✓</span><span>Una imagen RGB → una de siete categorías.</span></div>
+            <div class="scope-row yes"><span class="mark">✓</span><span>Comparación experimental y reproducible.</span></div>
+            <div class="scope-row no"><span class="mark">×</span><span>No determina peligrosidad ni composición.</span></div>
+            <div class="scope-row no"><span class="mark">×</span><span>No decide reciclabilidad ni tratamiento.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="source">Pregunta, alcance y criterios definidos antes del entrenamiento en el plan experimental de la Actividad 1.</div>
+    </section>
+
+    <section class="slide" data-title="Dataset">
+      <div class="brand">02 · DATOS</div><div class="slide-number">03</div>
+      <div class="kicker">ETID versión 1 · CC BY 4.0</div>
+      <h2>Primero auditamos; después entrenamos</h2>
+      <div class="grid-4">
+        <div class="card"><div class="metric small">6.269</div><div class="label">archivos abiertos correctamente</div></div>
+        <div class="card"><div class="metric small">61</div><div class="label">resoluciones encontradas</div></div>
+        <div class="card"><div class="metric small red">2</div><div class="label">copias binarias excluidas</div></div>
+        <div class="card"><div class="metric small amber">9</div><div class="label">etiquetas corregidas en el manifiesto</div></div>
+      </div>
+      <div class="grid-2" style="margin-top:1.25rem">
+        <div class="card tint">
+          <h3>Siete clases</h3>
+          <p>Battery · Cable · Keyboard · Laptop · Mobile · Mouse · PCB</p>
+          <p class="muted" style="margin-bottom:0">Los originales no se modificaron; las decisiones quedaron versionadas.</p>
+        </div>
+        <div class="card">
+          <h3>La limitación ya está en los datos</h3>
+          <p><strong>Cable representa menos del 3 %</strong> del conjunto depurado. ETID mezcla procedencias y no garantiza representar las condiciones de un punto de recepción local.</p>
+        </div>
+      </div>
+      <div class="source">Sayed et al. (2026), DOI 10.17632/bndsgcspbx.1 · Documentación inspirada en Gebru et al. (2021).</div>
+    </section>
+
+    <section class="slide" data-title="Diseño experimental">
+      <div class="brand">03 · DISEÑO EXPERIMENTAL</div><div class="slide-number">04</div>
+      <div class="kicker">Partición por procedencia</div>
+      <h2>La prueba debía ser difícil por una razón</h2>
+      <div class="flow">
+        <div class="flow-node"><strong>4.289</strong><span>entrenamiento · 16 grupos</span></div><div class="arrow">→</div>
+        <div class="flow-node"><strong>983</strong><span>validación · 6 grupos</span></div><div class="arrow">→</div>
+        <div class="flow-node"><strong>995</strong><span>prueba final · 8 grupos</span></div>
+      </div>
+      <div class="lockline">
+        <span class="pill ok">✓ 0 rutas compartidas</span>
+        <span class="pill ok">✓ 0 hashes compartidos</span>
+        <span class="pill ok">✓ 0 grupos compartidos</span>
+        <span class="pill ok">✓ test cerrado</span>
+      </div>
+      <div class="grid-3" style="margin-top:1.3rem">
+        <div class="card"><h3>Métrica principal</h3><div class="metric small">F1 macro</div><p class="muted">Cada clase pesa lo mismo.</p></div>
+        <div class="card"><h3>Umbral previo</h3><div class="metric small">≥ 0,3149</div><p class="muted">Tres puntos sobre la línea base.</p></div>
+        <div class="card"><h3>Control minoritario</h3><div class="metric small">≥ 0,4091</div><p class="muted"><em>Recall</em> mínimo de <strong>Cable</strong>.</p></div>
+      </div>
+      <div class="source">La selección utilizó validación; el test se abrió una sola vez después de congelar el checkpoint.</div>
+    </section>
+
+    <section class="slide" data-title="Modelos">
+      <div class="brand">04 · DOS REFERENCIAS</div><div class="slide-number">05</div>
+      <div class="kicker">Complejidad con una obligación: demostrar valor</div>
+      <h2>Un modelo clásico frente a representaciones aprendidas</h2>
+      <div class="grid-2">
+        <div class="card model-box">
+          <div><div class="model-icon">▦</div><h3>HOG + LinearSVC</h3><p class="muted">Referencia simple basada en bordes y formas.</p></div>
+          <div class="model-steps"><div>Entrada 128 × 128</div><div>8.100 características HOG</div><div>C = 0,01 elegido en validación</div><div>Ajuste rápido en CPU</div></div>
+        </div>
+        <div class="card dark model-box">
+          <div><div class="model-icon">◉</div><h3>EfficientNet-B0</h3><p style="color:#dbeafe">Transferencia desde ImageNet y cabeza de siete salidas.</p></div>
+          <div class="model-steps"><div>Entrada 224 × 224 con <em>letterbox</em></div><div>Bloques MBConv + <em>squeeze-and-excitation</em></div><div>AdamW + pérdida ponderada</div><div>Parada temprana por F1 macro</div></div>
+        </div>
+      </div>
+      <div class="source">EfficientNet: Tan y Le (2019) · AdamW: Loshchilov y Hutter (2019).</div>
+    </section>
+
+    <section class="slide" data-title="Optimización">
+      <div class="brand">05 · OPTIMIZACIÓN</div><div class="slide-number">06</div>
+      <div class="kicker">Un cambio controlado por experimento</div>
+      <h2>La mejor decisión fue detenerse a tiempo</h2>
+      <div class="split-wide" style="grid-template-columns:.78fr 1.22fr">
+        <div>
+          <div class="experiment-row"><strong>E01</strong><div class="bar"><i style="width:99.9%"></i></div><strong>0,8770</strong></div>
+          <div class="experiment-row"><strong>E02</strong><div class="bar"><i style="width:98.4%"></i></div><strong>0,8639</strong></div>
+          <div class="experiment-row selected"><strong>E03</strong><div class="bar"><i style="width:100%"></i></div><strong>0,8777</strong></div>
+          <div class="card tint" style="margin-top:1rem">
+            <h3>Lectura honesta</h3>
+            <p>E03 superó a E01 por apenas <strong>0,0008</strong>: empate práctico, no una victoria sustantiva del <em>dropout</em> 0,4.</p>
+            <span class="pill warn">Ajuste fino rechazado: −0,0106</span>
+          </div>
+        </div>
+        <img class="chart-img" src="../reports/figuras/figura_1_curvas_aprendizaje.png" alt="Curvas de pérdida y F1 macro de los experimentos E01, E02 y E03">
+      </div>
+      <div class="source">Las tres configuraciones alcanzaron su mejor validación en la primera época; después aumentó la brecha frente a entrenamiento.</div>
+    </section>
+
+    <section class="slide" data-title="Comparación">
+      <div class="brand">06 · RESULTADO PRINCIPAL</div><div class="slide-number">07</div>
+      <div class="kicker">Misma prueba · métricas equivalentes</div>
+      <h2>La mejora fue amplia y consistente en esta muestra</h2>
+      <div class="comparison">
+        <div class="score-box"><div class="label">HOG + LinearSVC</div><div class="metric">0,2849</div><div class="label">F1 macro en prueba</div></div>
+        <div class="delta"><div class="metric small">+0,4612</div><div class="label">mejora absoluta</div></div>
+        <div class="score-box winner"><span class="pill ok">MODELO SELECCIONADO</span><div class="metric green" style="margin-top:.65rem">0,7461</div><div class="label">EfficientNet-B0</div></div>
+      </div>
+      <div class="grid-3" style="margin-top:1.15rem">
+        <div class="card"><h3>Intervalo 95 %</h3><p style="font-weight:800;color:var(--navy)">[0,4237; 0,5022]</p><p class="muted"><em>Bootstrap</em> pareado.</p></div>
+        <div class="card"><h3>Exactitud</h3><p style="font-weight:800;color:var(--navy)">0,7769</p><p class="muted">Mejora absoluta: +0,4422.</p></div>
+        <div class="card"><h3>Validación → test</h3><p style="font-weight:800;color:var(--red)">−0,1316</p><p class="muted">Señal de cambio entre procedencias.</p></div>
+      </div>
+      <div class="source">Evaluación final congelada sobre 995 imágenes · 2.000 remuestreos pareados.</div>
+    </section>
+
+    <section class="slide" data-title="Errores">
+      <div class="brand">07 · ANÁLISIS DE ERRORES</div><div class="slide-number">08</div>
+      <div class="kicker">El promedio no cuenta toda la historia</div>
+      <h2>Las clases fallan de maneras distintas</h2>
+      <div class="grid-2" style="grid-template-columns:.9fr 1.1fr">
+        <div class="card">
+          <h3>F1 por clase</h3>
+          <div class="class-row"><span>Battery</span><div class="bar"><i style="width:86.1%"></i></div><strong>0,861</strong></div>
+          <div class="class-row low"><span>Cable</span><div class="bar"><i style="width:50%"></i></div><strong>0,500</strong></div>
+          <div class="class-row"><span>Keyboard</span><div class="bar"><i style="width:77.5%"></i></div><strong>0,775</strong></div>
+          <div class="class-row"><span>Laptop</span><div class="bar"><i style="width:76.1%"></i></div><strong>0,761</strong></div>
+          <div class="class-row low"><span>Mobile</span><div class="bar"><i style="width:69.1%"></i></div><strong>0,691</strong></div>
+          <div class="class-row"><span>Mouse</span><div class="bar"><i style="width:83.1%"></i></div><strong>0,831</strong></div>
+          <div class="class-row"><span>PCB</span><div class="bar"><i style="width:80.3%"></i></div><strong>0,803</strong></div>
+        </div>
+        <div>
+          <div class="card tint"><h3>Cable: encuentra, pero acusa de más</h3><p><strong><em>Recall</em> 0,909</strong> frente a <strong>precisión 0,345</strong>. Solo hay 22 casos de prueba.</p></div>
+          <div class="card tint" style="margin-top:.75rem"><h3>Mobile: absorbe otros objetos</h3><p>Recibió 65 PCB, 30 portátiles y 22 baterías. Algunas formas y fondos parecen pesar más que el objeto.</p></div>
+          <div class="card" style="margin-top:.75rem"><h3>Laptop y PCB: predicciones conservadoras</h3><p>Precisión superior a 0,98, pero <em>recall</em> de 0,622 y 0,675.</p></div>
+        </div>
+      </div>
+      <div class="source">Métricas por clase obtenidas de las predicciones finales congeladas.</div>
+    </section>
+
+    <section class="slide" data-title="Reproducibilidad">
+      <div class="brand">08 · REPRODUCIBILIDAD</div><div class="slide-number">09</div>
+      <div class="kicker">Una cifra defendible deja rastro</div>
+      <h2>El resultado puede auditarse sin confiar en nuestra memoria</h2>
+      <div class="grid-2" style="grid-template-columns:1.05fr .95fr">
+        <div class="tree" aria-label="Estructura del repositorio">
+          <span class="folder">Repositorio_ETID/</span><br>
+          ├── <span class="folder">data/splits/</span> <span class="file">manifiestos + hashes</span><br>
+          ├── <span class="folder">notebooks/</span> <span class="file">pipeline ejecutado</span><br>
+          ├── <span class="folder">models/</span> <span class="file">checkpoint seleccionado</span><br>
+          ├── <span class="folder">results/</span> <span class="file">métricas + predicciones</span><br>
+          ├── <span class="folder">docs/</span> <span class="file">dataset/model cards</span><br>
+          └── <span class="folder">src/</span> <span class="file">descarga + verificación</span>
+        </div>
+        <div class="scope-list">
+          <div class="scope-row yes"><span class="mark">✓</span><span>Semilla 20261017 y versiones registradas.</span></div>
+          <div class="scope-row yes"><span class="mark">✓</span><span>6.267 imágenes verificadas por SHA-256.</span></div>
+          <div class="scope-row yes"><span class="mark">✓</span><span>Notebook ejecutado sin errores ni rutas personales.</span></div>
+          <div class="scope-row yes"><span class="mark">✓</span><span>Checkpoint cargado con correspondencia estricta.</span></div>
+          <div class="scope-row yes"><span class="mark">✓</span><span>Inferencia real aprobada en una copia limpia.</span></div>
+        </div>
+      </div>
+      <div class="card dark" style="margin-top:1.15rem;padding:.8rem 1rem"><strong>Resultado de auditoría del repositorio:</strong> APROBADO en todos los controles.</div>
+      <div class="source">El dataset no se redistribuye; el repositorio documenta su descarga desde Mendeley Data.</div>
+    </section>
+
+    <section class="slide" data-title="Riesgos y uso">
+      <div class="brand">09 · USO RESPONSABLE</div><div class="slide-number">10</div>
+      <div class="kicker">Un buen resultado no elimina el contexto</div>
+      <h2>¿Qué tendría que cambiar antes de un piloto?</h2>
+      <table class="risk-table">
+        <tr><td>Cambio de procedencia</td><td>Evaluación externa con imágenes de otro punto de recepción, sin reajustar primero el modelo.</td></tr>
+        <tr><td>Cable y Mobile</td><td>Ampliación dirigida de datos y revisión de falsos positivos antes de abrir un test nuevo.</td></tr>
+        <tr><td>Sobreconfianza</td><td>Calibración de probabilidades y opción de abstención para enviar casos dudosos a revisión.</td></tr>
+        <tr><td>Uso fuera de alcance</td><td>Interfaz que prohíba interpretar la categoría como peligrosidad, reciclabilidad o tratamiento.</td></tr>
+      </table>
+      <div class="verdict"><strong>Condición de uso:</strong> apoyo supervisado y experimental. No clasificador autónomo.</div>
+      <div class="source">Gestión de riesgos orientada por NIST AI RMF 1.0 (2023) y ficha del modelo basada en Mitchell et al. (2019).</div>
+    </section>
+
+    <section class="slide" data-title="Conclusión">
+      <div class="brand">10 · CONCLUSIÓN</div><div class="slide-number">11</div>
+      <div class="kicker">La respuesta final</div>
+      <h2>Mejor modelo, evidencia limitada, decisión responsable</h2>
+      <div class="grid-3">
+        <div class="card"><span class="pill ok">DEMOSTRADO</span><h3 style="margin-top:.8rem">Sí hubo mejora</h3><p>+0,4612 de F1 macro frente a la línea base sobre la misma prueba.</p></div>
+        <div class="card"><span class="pill warn">ADVERTENCIA</span><h3 style="margin-top:.8rem">No generaliza igual</h3><p>La caída de 0,1316 entre validación y test revela sensibilidad a la procedencia.</p></div>
+        <div class="card"><span class="pill" style="background:#fbe9ec;color:var(--red)">LÍMITE</span><h3 style="margin-top:.8rem">No está listo para operar solo</h3><p>Los errores por clase aún pueden producir decisiones relevantes y desiguales.</p></div>
+      </div>
+      <div class="verdict" style="margin-top:1.25rem">EfficientNet-B0 es una referencia experimental claramente superior para ETID y justifica continuar investigando; todavía no justifica delegarle una decisión operativa.</div>
+      <div class="step-list" style="grid-template-columns:repeat(4,1fr);margin-top:1.05rem;gap:1rem">
+        <div class="step"><strong>Validar</strong><br><span class="muted">otro contexto</span></div>
+        <div class="step"><strong>Ampliar</strong><br><span class="muted">clases débiles</span></div>
+        <div class="step"><strong>Calibrar</strong><br><span class="muted">y abstenerse</span></div>
+        <div class="step"><strong>Repetir</strong><br><span class="muted">con test nuevo</span></div>
+      </div>
+      <div class="source">Conclusión sustentada en resultados congelados; no se reajustó el modelo después de consultar la prueba.</div>
+    </section>
+
+  </main>
+
+  <nav class="controls" aria-label="Controles de presentación">
+    <button id="prev" title="Anterior (←)" aria-label="Diapositiva anterior">←</button>
+    <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+    <div class="counter" id="counter">1 / 11</div>
+    <button id="next" title="Siguiente (→)" aria-label="Diapositiva siguiente">→</button>
+  </nav>
+
+  <script>
+    (() => {
+      const slides = [...document.querySelectorAll('.slide')];
+      const progress = document.getElementById('progress');
+      const counter = document.getElementById('counter');
+      let index = Math.max(0, Math.min(slides.length - 1, Number(location.hash.slice(1)) - 1 || 0));
+
+      function show(next, updateHash = true) {
+        index = (next + slides.length) % slides.length;
+        slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+        progress.style.width = `${((index + 1) / slides.length) * 100}%`;
+        counter.textContent = `${index + 1} / ${slides.length}`;
+        document.title = `${String(index + 1).padStart(2, '0')} · ${slides[index].dataset.title} · ETID`;
+        if (updateHash) history.replaceState(null, '', `#${index + 1}`);
+      }
+
+      document.getElementById('prev').addEventListener('click', () => show(index - 1));
+      document.getElementById('next').addEventListener('click', () => show(index + 1));
+      document.addEventListener('keydown', event => {
+        if (['ArrowRight', 'PageDown', ' ', 'Enter'].includes(event.key)) { event.preventDefault(); show(index + 1); }
+        if (['ArrowLeft', 'PageUp', 'Backspace'].includes(event.key)) { event.preventDefault(); show(index - 1); }
+        if (event.key === 'Home') show(0);
+        if (event.key === 'End') show(slides.length - 1);
+      });
+      addEventListener('hashchange', () => show(Number(location.hash.slice(1)) - 1 || 0, false));
+      show(index, false);
+    })();
+  </script>
+</body>
+</html>

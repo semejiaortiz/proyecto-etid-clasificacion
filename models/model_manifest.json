@@ -1,0 +1,13 @@
+{
+  "file": "efficientnet_b0_etid_selected.pt",
+  "architecture": "EfficientNet-B0",
+  "source_experiment": "E03_lr1e-3_drop04",
+  "selected_epoch_in_source": 1,
+  "fine_tuning_accepted": false,
+  "classes": ["Battery", "Cable", "Keyboard", "Laptop", "Mobile", "Mouse", "PCB"],
+  "seed": 20261017,
+  "validation_f1_macro": 0.877723199040199,
+  "test_f1_macro": 0.746109316241444,
+  "sha256": "9d5361fed4282fdbe5744f3e559cea4ecb7a252598699978b5a596a53146b349"
+}
+

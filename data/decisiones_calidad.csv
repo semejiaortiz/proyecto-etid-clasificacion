@@ -1,0 +1,14 @@
+ruta,accion,etiqueta_final,motivo
+Mouse/ewaste-mixed-22_Mobile_03610.jpg,excluir,,Duplicado binario de Mobile/ewaste-mixed-18_Mobile_02015.jpg y etiqueta visual incorrecta.
+Mouse/ewaste-mixed-22_Mobile_03615.jpg,excluir,,Duplicado binario de Mobile/ewaste-mixed-18_Mobile_02017.jpg y etiqueta visual incorrecta.
+Mouse/ewaste-mixed-22_Mobile_03611.jpg,reetiquetar,Mobile,El nombre de archivo y la inspección visual independiente identifican un teléfono móvil.
+Keyboard/Ewaste-1_laptop_169.jpg,mantener,Keyboard,El nombre es ambiguo pero la inspección visual muestra un teclado como objeto principal.
+Keyboard/ewaste-mixed-5_Laptop_02399.jpg,mantener,Keyboard,Escena con varios objetos; el teclado ocupa la región principal y se conserva con una advertencia de ambigüedad.
+Laptop/Ewaste-1_laptop_94.jpeg,reetiquetar,Keyboard,La inspección de la pareja perceptualmente coincidente confirma que el objeto es un teclado.
+Keyboard/Ewaste-1_keyboard_10.jpg,reetiquetar,Laptop,La inspección visual confirma que el objeto principal es un computador portátil.
+Keyboard/Ewaste-1_keyboard_11.jpg,reetiquetar,Laptop,La inspección visual confirma que el objeto principal es un computador portátil.
+Mobile/Ewaste-1_mobile phone_150.jpeg,reetiquetar,Keyboard,La inspección de la pareja perceptualmente coincidente confirma que el objeto es un teclado.
+Mobile/Ewaste-1_mobile phone_190.jpg,reetiquetar,Laptop,La inspección visual confirma que el objeto principal es un computador portátil.
+Mobile/Ewaste-1_mobile phone_191.jpg,reetiquetar,Laptop,La inspección visual confirma que el objeto principal es un computador portátil.
+Laptop/Ewaste-1_laptop_76.jpg,reetiquetar,Mobile,La inspección visual confirma que el objeto es un teléfono móvil.
+Mouse/Ewaste-1_mouse_50.jpeg,reetiquetar,Keyboard,La inspección visual confirma que el objeto es un teclado.

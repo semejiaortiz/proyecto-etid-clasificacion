@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "Si utiliza este trabajo académico, cite el repositorio y el dataset ETID por separado."
+title: "Clasificación visual de residuos electrónicos con EfficientNet-B0"
+type: software
+authors:
+  - family-names: "Mejia Ortiz"
+    given-names: "Sebastian"
+  - family-names: "Jimenez Mienez"
+    given-names: "Laura Mariana"
+  - family-names: "Duran"
+    given-names: "Luis Gonzalo"

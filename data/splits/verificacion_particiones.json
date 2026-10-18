@@ -1,0 +1,33 @@
+{
+  "filas_incluidas": 6267,
+  "conteos": {
+    "train": 4289,
+    "validation": 983,
+    "test": 995
+  },
+  "intersecciones": {
+    "train-validation": {
+      "rutas_compartidas": 0,
+      "sha256_compartidos": 0,
+      "grupos_compartidos": 0
+    },
+    "train-test": {
+      "rutas_compartidas": 0,
+      "sha256_compartidos": 0,
+      "grupos_compartidos": 0
+    },
+    "validation-test": {
+      "rutas_compartidas": 0,
+      "sha256_compartidos": 0,
+      "grupos_compartidos": 0
+    }
+  },
+  "todas_las_clases_en_cada_particion": true,
+  "coincidencias_perceptuales_estrictas_entre_particiones": 0,
+  "sha256_manifiestos": {
+    "train.csv": "b0759318003bab059154a48de9e1bff47fbc02cb4e70e72b672f956bfa9309fa",
+    "validation.csv": "bb17b6d7c7d398d02f847b2114d5d574e028dd8756a17a803d98604313ef7eed",
+    "test.csv": "e63e149a2417fb4773121710248fef286f9ab908d7133b7ccfa8c7997d19a935"
+  },
+  "resultado": "APROBADO"
+}
