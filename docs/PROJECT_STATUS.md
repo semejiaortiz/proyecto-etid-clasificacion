@@ -22,6 +22,7 @@
 - Carga estricta del checkpoint e inferencia real aprobadas en el entorno limpio.
 - Informe técnico final de la Actividad 3 consolidado en Markdown, Word y PDF de ocho páginas.
 - Presentación final de la Actividad 3 en HTML: once diapositivas, formato 16:9 y funcionamiento sin conexión.
+- Repositorio remoto publicado y verificado desde una copia limpia.
 
 ## Actividad 2 cerrada
 
@@ -30,4 +31,3 @@ El notebook y el informe técnico están ejecutados, auditados y sincronizados c
 ## Pendiente para la Actividad 3
 
 - Elaborar el guion y el banco de preguntas técnicas.
-- Publicar el repositorio remoto; las licencias, los tamaños y el conjunto publicable ya fueron revisados.

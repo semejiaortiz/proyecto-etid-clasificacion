@@ -30,7 +30,7 @@ Repositorio_ETID/
 ├── docs/          Fichas del dataset, modelo y reproducibilidad
 ├── models/        Checkpoint final verificado
 ├── notebooks/     Notebook ejecutado de principio a fin
-├── presentation/  Plan del material de sustentación de la Actividad 3
+├── presentation/  Presentación HTML final y material de sustentación
 ├── reports/       Informes y figuras
 ├── results/       Métricas, predicciones e historiales
 └── src/           Descarga, preparación y controles de integridad
